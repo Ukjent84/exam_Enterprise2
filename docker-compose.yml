@@ -1,0 +1,24 @@
+# Useful commands:
+# docker-compose build
+# docker-compose up
+# docker-compose ps
+# docker-compose down
+
+version: '3.7'
+
+services:
+
+
+  # Note that here I am using a real database, and not
+  # an embedded one like H2
+  postgres:
+    image: "postgres:10"
+
+  flight:
+    build:
+      context: ./flight-service
+      dockerfile: Dockerfile
+    depends_on:
+    - postgres
+    ports:
+    - "8080:8080"
